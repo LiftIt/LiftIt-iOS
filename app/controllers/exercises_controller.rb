@@ -1,13 +1,12 @@
 class ExercisesController < UIViewController
   attr_accessor :routine
-  attr_accessor :delegate
 
   def viewDidLoad
     super
 
-    self.title = routine["name"]
+    self.title = routine.name
 
-    @data = routine["exercises"]
+    @data = routine.exercises
     @table = UITableView.alloc.initWithFrame(self.view.bounds)
     self.view.addSubview @table
 
@@ -27,21 +26,17 @@ class ExercisesController < UIViewController
     end
 
     exercise = @data[indexPath.row]
-    name = exercise[:name]
-    sets = exercise[:sets]
-    reps = exercise[:reps]
 
-    title = "#{exercise[:name]} (#{exercise[:sets]}x"
-
-    if reps.is_a?(Array)
-      title = "#{title}...)"
-    else
-      title = "#{title}#{exercise[:reps]})"
-    end
-
-    title = "#{title} #{exercise[:rest]}\""
-
-    cell.textLabel.text = title
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
+    cell.textLabel.text = exercise.label
     cell
+  end
+
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    tableView.deselectRowAtIndexPath(indexPath, animated: true)
+
+    exercise = ExerciseController.alloc.init
+    exercise.exercise = @data[indexPath.row]
+    self.navigationController.pushViewController(exercise, animated:true)
   end
 end

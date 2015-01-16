@@ -2,6 +2,7 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bubble-wrap'
+# require 'motion-pixatefreestyle'
 
 begin
   require 'bundler'
@@ -12,4 +13,10 @@ end
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
   app.name = 'LiftIt'
+  app.interface_orientations = [:portrait]
+  app.pixatefreestyle.framework = 'vendor/PixateFreestyle.framework'
+
+  app.pods do
+    pod 'MZTimerLabel'
+  end
 end

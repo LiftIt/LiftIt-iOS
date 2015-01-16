@@ -20,7 +20,9 @@ class RoutinesController < UIViewController
 
   def reload
     Routine.all do |routines|
-      @data = routines["routines"]
+      puts "reload:"
+      p routines
+      @data = routines
       @table.reloadData
     end
   end
@@ -36,7 +38,8 @@ class RoutinesController < UIViewController
       UITableViewCell.alloc.initWithStyle(UITableViewCellStyleDefault, reuseIdentifier:@reuseIdentifier)
     end
 
-    cell.textLabel.text = @data[indexPath.row][:name]
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator
+    cell.textLabel.text = @data[indexPath.row].name
     cell
   end
 
@@ -45,11 +48,6 @@ class RoutinesController < UIViewController
 
     exercises = ExercisesController.alloc.init
     exercises.routine = @data[indexPath.row]
-    exercises.delegate = self
     self.navigationController.pushViewController(exercises, animated:true)
-  end
-
-  def closedExercises
-    self.dismissViewControllerAnimated true, completion:nil
   end
 end
