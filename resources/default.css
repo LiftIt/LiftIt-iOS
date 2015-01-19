@@ -1,0 +1,30 @@
+#exercise_view {
+  background-color: white;
+}
+
+#name_label,
+#reps_label {
+  font-size: 20px;
+  text-align: center;
+  color: #000;
+}
+
+#name_label {
+  font-size: 25px;
+}
+
+#current_label {
+  text-align: center;
+  font-size: 40px;
+}
+
+#timer_label {
+  font-size: 60px;
+  text-align: center;
+  color: #7F7F7F;
+}
+
+#timer_button {
+  color: white;
+  background-color: #007F00;
+}
