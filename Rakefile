@@ -2,6 +2,8 @@
 $:.unshift("/Library/RubyMotion/lib")
 require 'motion/project/template/ios'
 require 'bubble-wrap'
+require 'bubble-wrap/ui'
+require 'bubble-wrap/media'
 # require 'motion-pixatefreestyle'
 
 begin

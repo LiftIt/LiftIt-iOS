@@ -68,6 +68,12 @@ class ExerciseView < UIView
   end
 
   def timerLabel(timerLabel, finshedCountDownTimerWithTime:countTime)
+    local_file = NSURL.fileURLWithPath(File.join(NSBundle.mainBundle.resourcePath, 'alert1.mp3'))
+    BW::Media.play(local_file) do |media_player|
+      media_player.view.frame = [[10, 100], [100, 100]]
+      media_player.view.alpha = 0.0
+      self.addSubview(media_player.view)
+    end
     start_next
   end
 
