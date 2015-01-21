@@ -9,38 +9,52 @@ class Exercise
         self.send("#{k.to_s}=", v)
       end
     end
-    self.status = "not_started"
+    reset
+  end
+
+  def reset
+    @status = 'not_started'
+    @current_set = 0
+  end
+
+  def start
+    next_set
+    @status = 'started'
+  end
+
+  def rest
+    raise 'Not started' unless started?
+    @status = 'resting'
+  end
+
+  def started?
+    @status == 'started'
+  end
+
+  def next_set
+    # if @current_set < @reps
+    @current_set += 1
   end
 
   def to_s
     self.name
   end
 
-  def start
-    puts "[Exercise] start (#{self.status})"
-    self.status = "started"
-    self.current_set ||= 0
-    self.current_set += 1
+  # def start
+  #   puts "[Exercise] start (#{self.status})"
+  #   self.status = "started"
+  #   self.current_set ||= 0
+  #   self.current_set += 1
 
-    if self.current_set > self.sets
-      self.next
-    else
-      self
-    end
-  end
-
-  def next
-    puts "[Exercise] next"
-    routine.next(self)
-  end
+  #   if self.current_set > self.sets
+  #     self.next
+  #   else
+  #     self
+  #   end
+  # end
 
   def finish
-    puts "[Exercise] finish (#{self.status})"
-    self.status = "not_started"
-  end
-
-  def started?
-    self.status == 'started'
+    self.status = "finished"
   end
 
   def reps_label

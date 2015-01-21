@@ -1,9 +1,9 @@
-describe "Application 'LiftIt'" do
-  before do
-    @app = UIApplication.sharedApplication
-  end
+# describe "Application 'LiftIt'" do
+#   before do
+#     @app = UIApplication.sharedApplication
+#   end
 
-  it "has one window" do
-    @app.windows.size.should == 1
-  end
-end
+#   it "has one window" do
+#     @app.windows.size.should == 1
+#   end
+# end

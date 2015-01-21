@@ -8,6 +8,12 @@ class Routine
         self.send("#{k.to_s}=", v)
       end
     end
+
+    reset
+  end
+
+  def reset
+    @index = 0
   end
 
   def exercises
@@ -16,24 +22,16 @@ class Routine
 
   def exercises=(exercises)
     if exercises.first.is_a?(Hash)
-      i = 0
-      exercises = exercises.collect do |e|
-        ex = Exercise.new(e)
-        ex.routine = self
-        ex.pos = i
-        i += 1
-        ex
-      end
+      exercises = exercises.collect { |e| Exercise.new(e) }
     end
 
     @exercises = exercises
   end
 
-  def next(ex)
-    puts "[Routine] next for #{ex}"
-    pos = exercises.index(ex) + 1
-    puts "[Routine] next -- pos = #{pos} ==> #{exercises[pos]}"
-    return self.exercises[pos] if pos <= self.exercises.size
+  def next
+    ret = exercises[@index]
+    @index += 1
+    ret
   end
 
   def self.url
